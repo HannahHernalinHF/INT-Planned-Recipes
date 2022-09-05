@@ -53,7 +53,7 @@ WITH current_week as(
     ON cps_recipe.id = sp.recipe_id
   WHERE cps_menu.region_code in ('se', 'dk', 'it', 'jp', 'no')
     --AND sp.distribution_center in ('SK','MO')
-  AND cps_menu.hellofresh_week >= '2022-W33' AND cps_menu.hellofresh_week <= '2022-W60'/*in (
+  AND cps_menu.hellofresh_week >= '2022-W34' AND cps_menu.hellofresh_week <= '2022-W60'/*in (
     SELECT DISTINCT hellofresh_week
     FROM dimensions.date_dimension
     WHERE hellofresh_running_week >= (SELECT current_running_week + 5 from current_week limit 1)
@@ -254,7 +254,6 @@ SELECT  r.country
             AND r.country = m.country
             AND m.product in ('classic-box', 'modularity')
     WHERE r.country = 'GB'
-    AND m.yearweek >= '2022-W33' AND m.yearweek <= '2022-W60'
-    AND product NOT LIKE 'modularity'
+    AND m.yearweek >= '2022-W34' AND m.yearweek <= '2022-W60'
+    AND product NOT LIKE 'modularity' OR r.status NOT LIKE 'Menu Gap Filler'
 ORDER BY 1,2
-
